@@ -5,9 +5,12 @@
 // Models are usually prototypes (similar to classes if you are familiar with those)
 
 import {LibraryItem} from './LibraryItems'
+import Bag from './Bag'
 
 function LibraryCollection(){
     this.__proto__ = []; // as of ES6 (2015)
+
+    this.bag = new Bag();
 
     this.addItem = function(item){
         this.push(new LibraryItem(
@@ -15,7 +18,11 @@ function LibraryCollection(){
 
             ((collection) => function(){
                 collection.removeItem(this); // "this" refers to the LibraryItem
-            })(this) // "this" refers to the array/collection
+            })(this), // "this" refers to the array/collection
+
+            ((collection) => function () {
+                collection.addToBag(this);
+            })(this.bag),
         ));
 
         // allows us to chain methods

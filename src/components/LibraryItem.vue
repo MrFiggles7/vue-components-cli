@@ -10,6 +10,7 @@
             <v-btn @click="item.checkOut()" class="btn btn-secondary">Check Out</v-btn>
             <v-btn @click="item.checkIn()" class="btn btn-secondary">Check In</v-btn>
             <v-btn @click="item.remove()" class="btn btn-warning">Remove Me</v-btn>
+            <v-btn @click="item.addToBag()" class="btn btn-primary">Add To Bag</v-btn>
         </div>
     </v-card>
 </template>

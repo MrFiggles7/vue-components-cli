@@ -1,4 +1,4 @@
-function LibraryItem(media, removeFunction){
+function LibraryItem(media, removeFunction, addToBagFunction){
     // list of possible values (enum)
     const STATUSES = {CHECKED_OUT: 'out', CHECKED_IN: 'in', LOST: 'lost'}
 
@@ -19,6 +19,8 @@ function LibraryItem(media, removeFunction){
     }
 
     media.remove = removeFunction || function(){};
+
+    media.addToBag = addToBagFunction || function(){};
 
     return media;
 }
