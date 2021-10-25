@@ -38,7 +38,8 @@
     </v-app-bar>
 
     <v-main>
-      <Library></Library>
+      <Library :library="library"></Library>
+      <Bag :bag="library.bag"></Bag>
     </v-main>
 
   </v-app>
@@ -46,16 +47,32 @@
 
 <script>
 import Library from './components/Library'
+import Bag from './components/Bag'
+import LibraryCollection from "./models/Library";
+import {Album, Book, Movie} from "./models/LibraryItems";
 
 export default {
   name: 'App',
 
   components: {
     Library,
+    Bag,
   },
 
-  data: () => ({
-    //
-  }),
+  computed:{
+
+  },
+
+  data() {
+    return{
+      library: new LibraryCollection()
+              .addItem(new Book('Interaction Design', 200))
+              .addItem(new Movie('Paw Patrol!', 78))
+              .addItem(new Movie('Harriet', 122))
+              .addItem(new Book('Brown Bear, Brown Bear', 0))
+              .addItem(new Album('Awaken, My Love!', 'Childish Gambino', 11)),
+    }
+
+  }
 };
 </script>
