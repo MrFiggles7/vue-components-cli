@@ -1,16 +1,7 @@
-// The 'Model' is responsible for managing the data of the application.
-// You can define your models in the 'data' section of each Vue component
-// or define them separately if they might be used by multiple components.
-
-// Models are usually prototypes (similar to classes if you are familiar with those)
-
 import {LibraryItem} from './LibraryItems'
-import Bag from './Bag'
 
-function LibraryCollection(){
+function Library(bag){
     this.__proto__ = []; // as of ES6 (2015)
-
-    this.bag = new Bag();
 
     this.addItem = function(item){
         this.push(new LibraryItem(
@@ -22,7 +13,7 @@ function LibraryCollection(){
 
             ((collection) => function () {
                 collection.addToBag(this);
-            })(this.bag),
+            })(bag),
         ));
 
         // allows us to chain methods
@@ -44,8 +35,10 @@ function LibraryCollection(){
 
     return this;
 }
-// current and pre-ES6
-LibraryCollection.prototype = [];
-LibraryCollection.prototype.constructor = LibraryCollection;
 
-export default LibraryCollection;
+
+// current and pre-ES6
+//LibraryCollection.prototype = [];
+//LibraryCollection.prototype.constructor = LibraryCollection;
+
+export default Library;

@@ -7,6 +7,7 @@
             <v-col>
                 <v-container>
                     <p class="text-h2">Bag: {{bag.length}}</p>
+                    <v-btn @click="bag.checkOut(bag)">Check Out Bag</v-btn>
                 </v-container>
             </v-col>
         </v-row>

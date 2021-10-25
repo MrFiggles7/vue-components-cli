@@ -38,7 +38,7 @@
     </v-app-bar>
 
     <v-main>
-      <Library :library="library"></Library>
+      <Library :library="library.library"></Library>
       <Bag :bag="library.bag"></Bag>
     </v-main>
 
@@ -48,7 +48,7 @@
 <script>
 import Library from './components/Library'
 import Bag from './components/Bag'
-import LibraryCollection from "./models/Library";
+import LibraryCollection from "./models/LibraryCollection";
 import {Album, Book, Movie} from "./models/LibraryItems";
 
 export default {
@@ -64,13 +64,15 @@ export default {
   },
 
   data() {
+
+    let libraryCollection = new LibraryCollection();
+    libraryCollection.library.addItem(new Book('Interaction Design', 200))
+            .addItem(new Movie('Paw Patrol!', 78))
+            .addItem(new Movie('Harriet', 122))
+            .addItem(new Book('Brown Bear, Brown Bear', 0))
+            .addItem(new Album('Awaken, My Love!', 'Childish Gambino', 11))
     return{
-      library: new LibraryCollection()
-              .addItem(new Book('Interaction Design', 200))
-              .addItem(new Movie('Paw Patrol!', 78))
-              .addItem(new Movie('Harriet', 122))
-              .addItem(new Book('Brown Bear, Brown Bear', 0))
-              .addItem(new Album('Awaken, My Love!', 'Childish Gambino', 11)),
+      library: libraryCollection,
     }
 
   }
