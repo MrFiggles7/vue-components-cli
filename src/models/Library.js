@@ -2,8 +2,9 @@ import {LibraryItem} from './LibraryItems'
 
 function Library(bag){
     this.__proto__ = []; // as of ES6 (2015)
+    this.length = 0;
 
-    this.addItem = function(item){
+    this.addItem = function(item, qty){
         this.push(new LibraryItem(
             item,
 
@@ -14,6 +15,8 @@ function Library(bag){
             ((collection) => function () {
                 collection.addToBag(this);
             })(bag),
+
+            qty
         ));
 
         // allows us to chain methods

@@ -4,6 +4,7 @@ import Library from './Library'
 
 function LibraryCollection(){
     this.__proto__ = []; // as of ES6 (2015)
+    this.length = 0;
 
     this.bag = new Bag();
 

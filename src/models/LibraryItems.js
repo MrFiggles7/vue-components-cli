@@ -8,21 +8,27 @@ function LibraryItem(media, removeFunction, addToBagFunction, qty){
     // methods
     media.checkIn = function(){
         this.status = STATUSES.CHECKED_IN;
+        this.qty++;
     }
 
     media.checkOut = function(){
-        this.status = STATUSES.CHECKED_OUT;
+        if(this.qty > 0){
+            this.qty--;
+        }
+        if(this.qty <= 0){
+            this.status = STATUSES.CHECKED_OUT;
+        }
     }
 
     media.isAvailable = function(){
         return this.status === STATUSES.CHECKED_IN;
     }
 
-    media.qty = qty;
-
     media.remove = removeFunction || function(){};
 
     media.addToBag = addToBagFunction || function(){};
+
+    media.qty = qty || 1;
 
     return media;
 }
@@ -49,4 +55,12 @@ function Album(title, artist, trackCount){
         this.id = Math.floor(Math.random() * 10e16);
 }
 
-export {LibraryItem, Book, Movie, Album}
+function Music(artistName, trackName, collectionName, artworkUrl100, kind){
+    this.artist = artistName;
+    this.trackName = trackName;
+    this.collectionName = collectionName;
+    this.image = artworkUrl100;
+    this.kind = kind;
+}
+
+export {LibraryItem, Book, Movie, Album, Music}

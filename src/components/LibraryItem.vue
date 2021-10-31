@@ -6,11 +6,12 @@
         <div class="v-card__title">
             <component :is="typeOfItem" :item="item"></component>
         </div>
+        <div class="v-card__subtitle text-h5">Qty: {{item.qty}}</div>
         <div class="v-card__actions">
-            <v-btn @click="item.checkOut()" class="btn btn-secondary">Check Out</v-btn>
+            <v-btn :disabled="item.qty <= 0" @click="item.checkOut()" class="btn btn-secondary">Check Out</v-btn>
             <v-btn @click="item.checkIn()" class="btn btn-secondary">Check In</v-btn>
             <v-btn @click="item.remove()" class="btn btn-warning">Remove Me</v-btn>
-            <v-btn @click="item.addToBag()" class="btn btn-primary">Add To Bag</v-btn>
+            <v-btn :disabled="item.qty <= 0" @click="item.addToBag()" class="btn btn-primary">Add To Bag</v-btn>
         </div>
     </v-card>
 </template>
@@ -19,13 +20,15 @@
     import Book from '../components/Book';
     import Movie from "./Movie";
     import Album from "./Album";
+    import Music from './Music';
     export default {
         name: "LibraryItem",
 
         components: {
             Book,
             Movie,
-            Album
+            Album,
+            Music
         },
 
         props: {

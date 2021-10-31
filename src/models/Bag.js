@@ -5,10 +5,14 @@ function Bag(){
     this.length = 0;
 
     this.addToBag = function(item){
-        if(this.includes(item)){
-            item.qty++;
+        if(item.qty <= 0){
+            return this;
+        }
+        else if(this.includes(item) && item.qty > 0){
+            item.qty--;
         }
         else{
+            console.log('pushed', item)
             this.push(new LibraryItem(
                 item,
 
@@ -19,8 +23,10 @@ function Bag(){
                 ((collection) => function () {
                     collection.addToBag(this);
                 })(this),
+
+                item.qty
             ));
-            item.qty++;
+            item.qty--;
         }
 
 

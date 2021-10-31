@@ -27,14 +27,17 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+
+        <v-text-field
+                label="Search"
+                hide-details="auto"
+                class="shrink"
+                v-model="searchTerm"
+                v-on:keyup.enter="search"
+        ></v-text-field>
+
+        <v-icon>search</v-icon>
+
     </v-app-bar>
 
     <v-main>
@@ -46,10 +49,13 @@
 </template>
 
 <script>
-import Library from './components/Library'
-import Bag from './components/Bag'
+import Library from './components/Library';
+// import LibraryModel from './models/Library';
+import Bag from './components/Bag';
 import LibraryCollection from "./models/LibraryCollection";
-import {Album, Book, Movie} from "./models/LibraryItems";
+
+import MediaFactory from './models/MediaFactory'
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -65,15 +71,57 @@ export default {
 
   data() {
 
-    let libraryCollection = new LibraryCollection();
-    libraryCollection.library.addItem(new Book('Interaction Design', 200))
-            .addItem(new Movie('Paw Patrol!', 78))
-            .addItem(new Movie('Harriet', 122))
-            .addItem(new Book('Brown Bear, Brown Bear', 0))
-            .addItem(new Album('Awaken, My Love!', 'Childish Gambino', 11))
+
+    // let libraryCollection = new LibraryCollection();
+    // libraryCollection.library.addItem(new Book('Interaction Design', 200), 3)
+    //         .addItem(new Movie('Paw Patrol!', 78), 3)
+    //         .addItem(new Movie('Harriet', 122), 1)
+    //         .addItem(new Book('Brown Bear, Brown Bear', 0), 4)
+    //         .addItem(new Album('Awaken, My Love!', 'Childish Gambino', 11), 2)
     return{
-      library: libraryCollection,
+      searchTerm: 'john',
+      library: new LibraryCollection(),
+      searching: true,
     }
+
+  },
+
+  methods: {
+    search() {
+      this.library.library.length = 0;
+
+      var mediaFactory = new MediaFactory()
+
+      if(this.searchTerm){
+
+
+
+        this.searching = true;
+
+        let url = 'https://itunes.apple.com/search';
+        let config = {
+          params: {
+            term: this.searchTerm,
+            media: 'music',
+            limit: 10,
+          }
+        }
+
+        axios.get(url, config)
+        .then((response) => {
+          console.log('Success', response);
+          if(response.data.results.length){
+            for(var i = 0; i < response.data.results.length; i++){
+
+              var item = mediaFactory.create(response.data.results[i]);
+
+              this.library.library.addItem(item);
+            }
+          }
+        })
+      }
+    }
+
 
   }
 };
