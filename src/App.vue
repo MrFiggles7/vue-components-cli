@@ -102,7 +102,7 @@ export default {
         let config = {
           params: {
             term: this.searchTerm,
-            media: 'music',
+            media: 'all',
             limit: 10,
           }
         }

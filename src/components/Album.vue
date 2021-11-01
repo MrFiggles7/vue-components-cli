@@ -7,12 +7,12 @@
 </template>
 
 <script>
-    import {Album} from '../models/LibraryItems'
+   // import {Album} from '../models/LibraryItems'
     export default {
         name: "Album",
 
         props: {
-            item: Album,
+           // item: Album,
         }
     }
 </script>

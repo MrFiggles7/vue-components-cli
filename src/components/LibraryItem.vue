@@ -6,7 +6,6 @@
         <div class="v-card__title">
             <component :is="typeOfItem" :item="item"></component>
         </div>
-        <div class="v-card__subtitle text-h5">Qty: {{item.qty}}</div>
         <div class="v-card__actions">
             <v-btn :disabled="item.qty <= 0" @click="item.checkOut()" class="btn btn-secondary">Check Out</v-btn>
             <v-btn @click="item.checkIn()" class="btn btn-secondary">Check In</v-btn>
@@ -21,6 +20,11 @@
     import Movie from "./Movie";
     import Album from "./Album";
     import Music from './Music';
+    import MusicVideo from "./MusicVideo";
+    import Podcast from "./Podcast";
+    import Software from "./Software";
+    import TvShow from "./TvShow";
+    import All from "./All";
     export default {
         name: "LibraryItem",
 
@@ -28,7 +32,12 @@
             Book,
             Movie,
             Album,
-            Music
+            Music,
+            MusicVideo,
+            Podcast,
+            Software,
+            TvShow,
+            All
         },
 
         props: {
@@ -40,6 +49,7 @@
                 return this.item.constructor.name;
             }
         },
+
     }
 </script>
 

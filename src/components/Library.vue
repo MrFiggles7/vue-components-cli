@@ -2,7 +2,7 @@
     <v-container>
         <v-row>
             <v-col>
-                <LibraryItem v-for="(item, i) in library" :item="item" :key="i"></LibraryItem>
+                <LibraryItem v-for="(item) in library" :item="item" :key="item.id"></LibraryItem>
             </v-col>
             <v-col>
                 <v-container>

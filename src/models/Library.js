@@ -1,10 +1,11 @@
 import {LibraryItem} from './LibraryItems'
 
 function Library(bag){
-    this.__proto__ = []; // as of ES6 (2015)
+    let arr = [];
+    //this.__proto__ = []; // as of ES6 (2015)
     this.length = 0;
 
-    this.addItem = function(item, qty){
+    arr.addItem = function(item, qty){
         this.push(new LibraryItem(
             item,
 
@@ -23,20 +24,20 @@ function Library(bag){
         return this;
     };
 
-    this.checkedOutItems = function(){
+    arr.checkedOutItems = function(){
         return this.filter(function(item){
             return !item.isAvailable();
         })
     }
 
-    this.removeItem = function(item){
+    arr.removeItem = function(item){
         console.log(item, this);
         this.splice(this.indexOf(item), 1);
 
         return this;
     }
 
-    return this;
+    return arr;
 }
 
 

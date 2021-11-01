@@ -1,4 +1,5 @@
 function LibraryItem(media, removeFunction, addToBagFunction, qty){
+
     // list of possible values (enum)
     const STATUSES = {CHECKED_OUT: 'out', CHECKED_IN: 'in', LOST: 'lost'}
 
@@ -8,16 +9,10 @@ function LibraryItem(media, removeFunction, addToBagFunction, qty){
     // methods
     media.checkIn = function(){
         this.status = STATUSES.CHECKED_IN;
-        this.qty++;
     }
 
     media.checkOut = function(){
-        if(this.qty > 0){
-            this.qty--;
-        }
-        if(this.qty <= 0){
-            this.status = STATUSES.CHECKED_OUT;
-        }
+        this.status = STATUSES.CHECKED_OUT;
     }
 
     media.isAvailable = function(){
@@ -33,26 +28,14 @@ function LibraryItem(media, removeFunction, addToBagFunction, qty){
     return media;
 }
 
-function Book(title, pages){
-    this.pages = pages;
-    this.title = title || 'Default Title';
-    this.id = Math.floor(Math.random() * 10e16);
-}
-
 // same as above using class syntax
 class Movie{
-    constructor(title, runningTime){
-        this.runningTime = runningTime;
-        this.title = title || 'Default Title';
+    constructor(trackName, artist, kind){
+        this.title = trackName;
+        this.artist = artist || 'Default Title';
+        this.kind = kind;
         this.id = Math.floor(Math.random() * 10e16);
     }
-}
-
-function Album(title, artist, trackCount){
-        this.title = title;
-        this.artist = artist;
-        this.trackCount = trackCount;
-        this.id = Math.floor(Math.random() * 10e16);
 }
 
 function Music(artistName, trackName, collectionName, artworkUrl100, kind){
@@ -61,6 +44,52 @@ function Music(artistName, trackName, collectionName, artworkUrl100, kind){
     this.collectionName = collectionName;
     this.image = artworkUrl100;
     this.kind = kind;
+    this.id = Math.floor(Math.random() * 10e16);
 }
 
-export {LibraryItem, Book, Movie, Album, Music}
+function Podcast(artistName, trackName, artworkUrl100, kind){
+    this.artist = artistName;
+    this.trackName = trackName;
+    this.image = artworkUrl100;
+    this.kind = kind;
+    this.id = Math.floor(Math.random() * 10e16);
+}
+function MusicVideo(artistName, trackName, artworkUrl100, kind){
+    this.artist = artistName;
+    this.trackName = trackName;
+    this.image = artworkUrl100;
+    this.kind = kind;
+    this.id = Math.floor(Math.random() * 10e16);
+}
+
+function Book(artistName, collectionName, description, artworkUrl100, kind){
+    this.artist = artistName;
+    this.collection = collectionName;
+    this.description = description
+    this.image = artworkUrl100;
+    this.kind = kind;
+    this.id = Math.floor(Math.random() * 10e16);
+}
+function TvShow(artistName, collectionName, trackName, shortDescription, artworkUrl100, kind){
+    this.artist = artistName;
+    this.collection = collectionName;
+    this.trackName = trackName,
+    this.description = shortDescription
+    this.image = artworkUrl100;
+    this.kind = kind;
+    this.id = Math.floor(Math.random() * 10e16);
+}
+
+function Software(description, supportedDevices){
+    this.description = description;
+    this.supportedDevices = supportedDevices;
+    this.id = Math.floor(Math.random() * 10e16);
+}
+
+function All(artistName, kind){
+    this.artist = artistName;
+    this.kind = kind;
+    this.id = Math.floor(Math.random() * 10e16);
+}
+
+export {LibraryItem, Movie, Music, Podcast, MusicVideo, Book, TvShow, Software, All}
