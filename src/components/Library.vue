@@ -21,7 +21,7 @@
         name: "Library",
 
         props:{
-          library: Object,
+          library: Array,
         },
         components: {
             LibraryItem

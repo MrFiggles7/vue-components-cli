@@ -3,9 +3,11 @@
         <!--                <h3 class="card-title">{{item.title}}</h3>-->
         <!--                <p class="card-text" v-if="item.constructor.name == 'Book'">Pages: {{item.pages}}</p>-->
         <!--                <p class="card-text" v-if="item.runningTime">Running Time: {{item.runningTime}}</p>-->
-        <div class="v-card__title">
+
+        <v-img height="100" width="100" v-if="item.image" :src="item.image"></v-img>
+        <v-card-title>
             <component :is="typeOfItem" :item="item"></component>
-        </div>
+        </v-card-title>
         <div class="v-card__actions">
             <v-btn :disabled="item.qty <= 0" @click="item.checkOut()" class="btn btn-secondary">Check Out</v-btn>
             <v-btn @click="item.checkIn()" class="btn btn-secondary">Check In</v-btn>
