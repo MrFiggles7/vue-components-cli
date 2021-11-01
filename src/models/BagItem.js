@@ -6,6 +6,6 @@ export default function BagItem(libraryItem, removeFunction) {
     };
 
     this.checkOut = function () {
-        this.libraryItem.check();
+        this.libraryItem.checkOut();
     }
 }
